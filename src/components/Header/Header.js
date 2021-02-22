@@ -1,11 +1,21 @@
 import React, { Fragment } from 'react'
+
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 
-const authenticatedOptions = (
+import './Header.scss'
+
+const authenticatedOptions = (user) => (
   <Fragment>
-    <Nav.Link href="#change-password">Change Password</Nav.Link>
-    <Nav.Link href="#sign-out">Sign Out</Nav.Link>
+    <Nav.Link href="#watchlists">Watchlists</Nav.Link>
+    <NavDropdown
+      title={user.email}
+      id="collasible-nav-dropdown"
+    >
+      <NavDropdown.Item href="#change-password">Change Password</NavDropdown.Item>
+      <NavDropdown.Item href="#sign-out">Sign Out</NavDropdown.Item>
+    </NavDropdown>
   </Fragment>
 )
 
@@ -23,18 +33,19 @@ const alwaysOptions = (
 )
 
 const Header = ({ user }) => (
-  <Navbar bg="primary" variant="dark" expand="md">
-    <Navbar.Brand href="#">
-      cryptopicket-client
-    </Navbar.Brand>
-    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    <Navbar.Collapse id="basic-navbar-nav">
-      <Nav className="ml-auto">
-        { user && <span className="navbar-text mr-2">Welcome, {user.email}</span>}
-        { alwaysOptions }
-        { user ? authenticatedOptions : unauthenticatedOptions }
-      </Nav>
-    </Navbar.Collapse>
+  <Navbar bg="transparent" variant="dark" expand="md">
+    <div className="container">
+      <Navbar.Brand href="#">
+        CryptoPicket
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="ml-auto">
+          { alwaysOptions }
+          { user ? authenticatedOptions(user) : unauthenticatedOptions }
+        </Nav>
+      </Navbar.Collapse>
+    </div>
   </Navbar>
 )
 

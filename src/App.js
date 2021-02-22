@@ -5,10 +5,16 @@ import { v4 as uuid } from 'uuid'
 import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from './components/AutoDismissAlert/AutoDismissAlert'
 import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer'
 import SignUp from './components/SignUp/SignUp'
 import SignIn from './components/SignIn/SignIn'
 import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
+
+import Home from './components/Home/Home'
+import Watchlists from './components/Watchlist/Watchlists'
+import CreateWatchlist from './components/Watchlist/CreateWatchlist'
+import Watchlist from './components/Watchlist/Watchlist'
 
 class App extends Component {
   constructor (props) {
@@ -42,17 +48,32 @@ class App extends Component {
     return (
       <Fragment>
         <Header user={user} />
-        {msgAlerts.map(msgAlert => (
-          <AutoDismissAlert
-            key={msgAlert.id}
-            heading={msgAlert.heading}
-            variant={msgAlert.variant}
-            message={msgAlert.message}
-            id={msgAlert.id}
-            deleteAlert={this.deleteAlert}
-          />
-        ))}
-        <main className="container">
+        <div style={{
+          position: 'absolute',
+          bottom: '1rem',
+          right: '1rem',
+          zIndex: 99999999
+        }} >
+          {msgAlerts.map(msgAlert => (
+            <AutoDismissAlert
+              key={msgAlert.id}
+              heading={msgAlert.heading}
+              variant={msgAlert.variant}
+              message={msgAlert.message}
+              id={msgAlert.id}
+              deleteAlert={this.deleteAlert}
+            />
+          ))}
+        </div>
+        <main className="container pt-5">
+          {/* Home Page */}
+          <Route path="/" exact render={() => (
+            <Fragment>
+              <Home user={user} />
+            </Fragment>
+          )} />
+
+          {/* User auth pages */}
           <Route path='/sign-up' render={() => (
             <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
@@ -65,7 +86,20 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
+
+          {/* Watchlist routes */}
+          <AuthenticatedRoute exact user={user} path='/watchlists' render={() => (
+            <Watchlists msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute exact user={user} path='/watchlists/create' render={() => (
+            <CreateWatchlist msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute exact user={user} path='/watchlist/:id' render={() => (
+            <Watchlist user={user} msgAlert={this.msgAlert} />
+          )} />
         </main>
+
+        <Footer user={user} />
       </Fragment>
     )
   }

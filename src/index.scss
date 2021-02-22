@@ -1,1 +1,53 @@
+// Overriding variables
+$body-bg: #303030;
+$body-color: #ffffff;
+$border-color: #545454;
+$input-placeholder-color: #adb5bd;
+
+// Imports
 @import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
+
+/*
+  Main Components
+*/
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.box {
+  @extend .rounded, .shadow-sm;
+  background: #424242;
+}
+
+.section-title {
+  @extend .border-bottom, .pb-2;
+}
+
+/*
+  Elements
+*/
+
+.form-control {
+  background-color: #545454;
+  border: none;
+  color: #fff;
+
+  &:focus {
+    background-color: #545454;
+    color: #fff;
+  }
+}
+
+.dropdown-menu {
+  left: -7rem;
+}
+
+/*
+  Helpers
+*/
+
+.lh-100 {
+  line-height: 1;
+}

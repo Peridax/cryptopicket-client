@@ -47,39 +47,40 @@ class ChangePassword extends Component {
     const { oldPassword, newPassword } = this.state
 
     return (
-      <div className="row">
-        <div className="col-sm-10 col-md-8 mx-auto mt-5">
-          <h3>Change Password</h3>
-          <Form onSubmit={this.onChangePassword}>
-            <Form.Group controlId="oldPassword">
-              <Form.Label>Old password</Form.Label>
-              <Form.Control
-                required
-                name="oldPassword"
-                value={oldPassword}
-                type="password"
-                placeholder="Old Password"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="newPassword">
-              <Form.Label>New Password</Form.Label>
-              <Form.Control
-                required
-                name="newPassword"
-                value={newPassword}
-                type="password"
-                placeholder="New Password"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Button
-              variant="primary"
-              type="submit"
-            >
-              Submit
-            </Button>
-          </Form>
+      <div className="row justify-content-center">
+        <div className="col-12 col-sm-12 col-md-5 col-lg-6 mt-3">
+          <div className="box p-3">
+            <h6 className="section-title">Change Password</h6>
+            <Form onSubmit={this.onChangePassword} className="mt-3">
+              <Form.Group controlId="oldPassword">
+                <Form.Control
+                  required
+                  name="oldPassword"
+                  value={oldPassword}
+                  type="password"
+                  placeholder="Old Password"
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="newPassword">
+                <Form.Control
+                  required
+                  name="newPassword"
+                  value={newPassword}
+                  type="password"
+                  placeholder="New Password"
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Button
+                variant="primary"
+                type="submit"
+                className="w-100"
+              >
+                Change Password
+              </Button>
+            </Form>
+          </div>
         </div>
       </div>
     )

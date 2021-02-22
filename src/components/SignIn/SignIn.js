@@ -48,39 +48,40 @@ class SignIn extends Component {
     const { email, password } = this.state
 
     return (
-      <div className="row">
-        <div className="col-sm-10 col-md-8 mx-auto mt-5">
-          <h3>Sign In</h3>
-          <Form onSubmit={this.onSignIn}>
-            <Form.Group controlId="email">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                required
-                type="email"
-                name="email"
-                value={email}
-                placeholder="Enter email"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                required
-                name="password"
-                value={password}
-                type="password"
-                placeholder="Password"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Button
-              variant="primary"
-              type="submit"
-            >
-              Submit
-            </Button>
-          </Form>
+      <div className="row justify-content-center">
+        <div className="col-12 col-sm-12 col-md-5 col-lg-6 mt-3">
+          <div className="box p-3">
+            <h6 className="section-title">Sign In</h6>
+            <Form onSubmit={this.onSignIn} className="mt-3">
+              <Form.Group controlId="email">
+                <Form.Control
+                  required
+                  type="email"
+                  name="email"
+                  value={email}
+                  placeholder="Email"
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="password">
+                <Form.Control
+                  required
+                  name="password"
+                  value={password}
+                  type="password"
+                  placeholder="Password"
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Button
+                variant="primary"
+                type="submit"
+                className="w-100"
+              >
+                Sign In
+              </Button>
+            </Form>
+          </div>
         </div>
       </div>
     )

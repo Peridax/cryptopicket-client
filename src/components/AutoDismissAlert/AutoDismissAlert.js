@@ -1,5 +1,5 @@
 import React from 'react'
-import Alert from 'react-bootstrap/Alert'
+import Toast from 'react-bootstrap/Toast'
 
 import './AutoDismissAlert.scss'
 
@@ -13,7 +13,7 @@ class AutoDismissAlert extends React.Component {
   }
 
   componentDidMount () {
-    this.timeoutId = setTimeout(this.handleClose, 5000)
+    // this.timeoutId = setTimeout(this.handleClose, 5000)
   }
 
   componentWillUnmount () {
@@ -23,7 +23,7 @@ class AutoDismissAlert extends React.Component {
   handleClose = () => this.setState({ show: false })
 
   render () {
-    const { variant, heading, message, deleteAlert, id } = this.props
+    const { heading, message, deleteAlert, id, variant } = this.props
 
     // Delete this alert after the fade animation time (300 ms by default)
     if (!this.state.show) {
@@ -33,19 +33,20 @@ class AutoDismissAlert extends React.Component {
     }
 
     return (
-      <Alert
-        dismissible
+      <Toast
         show={this.state.show}
-        variant={variant}
         onClose={this.handleClose}
+        delay={8000}
+        animation
+        autohide
       >
-        <div className="container">
-          <Alert.Heading>
-            {heading}
-          </Alert.Heading>
-          <p className="alert-body">{message}</p>
-        </div>
-      </Alert>
+        <Toast.Header
+          className={'bg-' + (variant || 'primary')}
+        >
+          <strong className="mr-auto">{heading}</strong>
+        </Toast.Header>
+        <Toast.Body>{message}</Toast.Body>
+      </Toast>
     )
   }
 }

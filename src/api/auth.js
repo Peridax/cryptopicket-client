@@ -1,6 +1,8 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
+/* User Auth */
+
 export const signUp = credentials => {
   return axios({
     method: 'POST',
@@ -33,7 +35,7 @@ export const signOut = user => {
     url: apiUrl + '/sign-out',
     method: 'DELETE',
     headers: {
-      'Authorization': `Token token=${user.token}`
+      'Authorization': `Bearer ${user.token}`
     }
   })
 }
@@ -43,13 +45,50 @@ export const changePassword = (passwords, user) => {
     url: apiUrl + '/change-password',
     method: 'PATCH',
     headers: {
-      'Authorization': `Token token=${user.token}`
+      'Authorization': `Bearer ${user.token}`
     },
     data: {
       passwords: {
         old: passwords.oldPassword,
         new: passwords.newPassword
       }
+    }
+  })
+}
+
+/* Watchlist */
+
+export const createWatchlist = (watchlist, user) => {
+  return axios({
+    url: apiUrl + '/watchlists',
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${user.token}`
+    },
+    data: {
+      watchlist: {
+        title: watchlist.title
+      }
+    }
+  })
+}
+
+export const fetchWatchlists = user => {
+  return axios({
+    url: apiUrl + '/watchlists',
+    method: 'GET',
+    headers: {
+      'Authorization': 'Bearer ' + user.token
+    }
+  })
+}
+
+export const fetchWatchlist = (id, user) => {
+  return axios({
+    url: apiUrl + '/watchlist/' + id,
+    method: 'GET',
+    headers: {
+      'Authorization': 'Bearer ' + user.token
     }
   })
 }
