@@ -1,6 +1,6 @@
 let apiUrl
 const apiUrls = {
-  production: 'https://cryptopicket-server.herokuapp.com/',
+  production: 'https://cryptopicket-server.herokuapp.com',
   development: 'http://localhost:4741'
 }
 
