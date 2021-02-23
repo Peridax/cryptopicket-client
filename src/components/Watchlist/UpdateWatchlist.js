@@ -1,14 +1,13 @@
 import React, { Component, Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import { fetchWatchlist } from './../../api/auth'
+import { fetchWatchlist, updateWatchlist } from './../../api/auth'
 
 class UpdateWatchlist extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      title: '',
-      coins: null
+      title: ''
     }
   }
 
@@ -32,7 +31,26 @@ class UpdateWatchlist extends Component {
 
   updateWatchlist = event => {
     event.preventDefault()
-    console.log('works')
+
+    const { user, msgAlert, history, match: { params } } = this.props
+
+    updateWatchlist(params.id, this.state.title, user)
+      .then(res => {
+        console.log(res)
+        msgAlert({
+          heading: 'Successfully updated watchlist',
+          message: 'The watchlist has been successfully updated to ' + this.state.title,
+          variant: 'success'
+        })
+      })
+      .then(() => history.push('/watchlist/' + params.id))
+      .catch(error => {
+        msgAlert({
+          heading: 'Failed to update watchlist',
+          message: 'Failed to update watchlist with error:' + error.message,
+          variant: 'danger'
+        })
+      })
   }
 
   render () {

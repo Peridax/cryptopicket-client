@@ -93,6 +93,21 @@ export const fetchWatchlist = (id, user) => {
   })
 }
 
+export const updateWatchlist = (id, title, user) => {
+  return axios({
+    url: apiUrl + '/watchlist/' + id,
+    method: 'PATCH',
+    headers: {
+      'Authorization': 'Bearer ' + user.token
+    },
+    data: {
+      watchlist: {
+        title: title
+      }
+    }
+  })
+}
+
 export const deleteWatchlist = (id, user) => {
   return axios({
     url: apiUrl + '/watchlist/' + id,
