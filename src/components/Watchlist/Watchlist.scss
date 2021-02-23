@@ -1,0 +1,9 @@
+.action-btn {
+  background-color: #525252;
+  border-color: #424242;
+
+  &:hover, &:active {
+    background-color: #505050!important;
+    border-color: #424242!important;
+  }
+}

@@ -15,6 +15,7 @@ import Home from './components/Home/Home'
 import Watchlists from './components/Watchlist/Watchlists'
 import CreateWatchlist from './components/Watchlist/CreateWatchlist'
 import Watchlist from './components/Watchlist/Watchlist'
+import UpdateWatchlist from './components/Watchlist/UpdateWatchlist'
 
 class App extends Component {
   constructor (props) {
@@ -49,7 +50,7 @@ class App extends Component {
       <Fragment>
         <Header user={user} />
         <div style={{
-          position: 'absolute',
+          position: 'fixed',
           bottom: '1rem',
           right: '1rem',
           zIndex: 99999999
@@ -74,11 +75,11 @@ class App extends Component {
           )} />
 
           {/* User auth pages */}
-          <Route path='/sign-up' render={() => (
-            <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
+          <Route exact path='/sign-up' render={() => (
+            <SignUp msgAlert={this.msgAlert} setUser={this.setUser} user={user} />
           )} />
-          <Route path='/sign-in' render={() => (
-            <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
+          <Route exact path='/sign-in' render={() => (
+            <SignIn msgAlert={this.msgAlert} setUser={this.setUser} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
@@ -96,6 +97,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute exact user={user} path='/watchlist/:id' render={() => (
             <Watchlist user={user} msgAlert={this.msgAlert} />
+          )} />
+          <AuthenticatedRoute exact user={user} path='/watchlist/:id/update' render={() => (
+            <UpdateWatchlist user={user} msgAlert={this.msgAlert} />
           )} />
         </main>
 

@@ -1,41 +1,38 @@
 import React, { Component, Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import { createWatchlist } from '../../api/auth'
+import { fetchWatchlist } from './../../api/auth'
 
-class CreateWatchlist extends Component {
+class UpdateWatchlist extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      title: ''
+      title: '',
+      coins: null
     }
+  }
+
+  componentDidMount () {
+    const { user, msgAlert, match: { params } } = this.props
+
+    fetchWatchlist(params.id, user)
+      .then(res => this.setState({ title: res.data.watchlist.title }))
+      .catch(error => {
+        msgAlert({
+          heading: 'Failed to fetch watchlist',
+          message: 'There was a problem fetching the watchlist you\'re trying to update with error: ' + error.message,
+          variant: 'danger'
+        })
+      })
   }
 
   handleChange = event => this.setState({
     [event.target.name]: event.target.value
   })
 
-  onCreateWatchlist = event => {
+  updateWatchlist = event => {
     event.preventDefault()
-
-    const { user, msgAlert, history } = this.props
-
-    createWatchlist(this.state, user)
-      .then(res => {
-        msgAlert({
-          heading: 'Successfully created watchlist',
-          message: 'The watchlist ' + res.data.watchlist.title + ' has been created',
-          variant: 'success'
-        })
-      })
-      .then(history.push('/watchlists'))
-      .catch(error => {
-        msgAlert({
-          heading: 'Failed to create watchlist',
-          message: 'Failed to create watchlist with error message: ' + error.message,
-          variant: 'danger'
-        })
-      })
+    console.log('works')
   }
 
   render () {
@@ -47,10 +44,10 @@ class CreateWatchlist extends Component {
           <div className="col-12 col-sm-12 col-md-8 col-lg-6 mt-3">
             <div className="card mt-3">
               <div className="card-header">
-                Create Watchlist
+                Update Watchlist
               </div>
               <div className="card-body">
-                <form onSubmit={this.onCreateWatchlist}>
+                <form onSubmit={this.updateWatchlist}>
                   <div className="form-group">
                     <input
                       required
@@ -78,4 +75,4 @@ class CreateWatchlist extends Component {
   }
 }
 
-export default withRouter(CreateWatchlist)
+export default withRouter(UpdateWatchlist)

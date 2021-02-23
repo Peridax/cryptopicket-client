@@ -1,9 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 
-import Table from 'react-bootstrap/Table'
 import './Watchlists.scss'
-
 import { fetchWatchlists } from '../../api/auth'
 
 class Watchlists extends Component {
@@ -33,34 +31,25 @@ class Watchlists extends Component {
     const { watchlists, isMounted } = this.state
 
     const watchlistsTable = watchlists => {
-      return (
-        <Table hover borderless style={{ marginBottom: 0 }}>
-          <thead>
-            <tr>
-              <th style={{ width: '90%' }}>Watchlists</th>
-              <th style={{ width: '10%' }} className="text-center">Coins</th>
-            </tr>
-          </thead>
-          <tbody>
-            {watchlists}
-          </tbody>
-        </Table>
-      )
+      return watchlists
     }
 
     const watchlistsList = (
-      watchlists.map(watchlist => (
-        <tr key={watchlist._id}>
-          <td>
+      watchlists.map((watchlist, index) => (
+        <div
+          key={watchlist._id}
+          className={'row align-items-center py-3 m-0' + (watchlists.length !== (index + 1) ? ' border-bottom' : '')}
+        >
+          <div className="col col-9 col-md-9 col-lg-10">
             <Link
               to={'/watchlist/' + watchlist._id}
               style={{ color: '#fff', textDecoration: 'none' }}
             >
               {watchlist.title}
             </Link>
-          </td>
-          <td className="text-center">0</td>
-        </tr>
+          </div>
+          <div className="col-auto text-center col-3 col-md-3 col-lg-2">0</div>
+        </div>
       ))
     )
 
@@ -68,24 +57,16 @@ class Watchlists extends Component {
       if (watchlists.length) {
         return watchlistsTable(watchlistsList)
       } else {
-        return (
-          <Fragment>
-            <h6 className="section-title">Watchlists</h6>
-            <p className="text-center mt-3 mb-0 p-3">No available watchlists</p>
-          </Fragment>
-        )
+        return <p className="text-center m-3">No available watchlists</p>
       }
     }
 
     const unloaded = (
-      <Fragment>
-        <h6 className="section-title">Watchlists</h6>
-        <div className="text-center mt-3 mb-0 p-3">
-          <div className="spinner-border text-light" role="status">
-            <span className="sr-only">Loading...</span>
-          </div>
+      <div className="text-center p-3">
+        <div className="spinner-border text-light" role="status">
+          <span className="sr-only">Loading...</span>
         </div>
-      </Fragment>
+      </div>
     )
 
     return (
@@ -97,8 +78,20 @@ class Watchlists extends Component {
                 Create Watchlist
               </button>
             </Link>
-            <div className="box p-3">
-              { isMounted ? loaded() : unloaded }
+            <div className="card">
+              <div className="card-header">
+                <div className="row align-items-center">
+                  <div className="col col-9 col-md-9 col-lg-10">
+                    Watchlists
+                  </div>
+                  <div className="col-auto text-center col-3 col-md-3 col-lg-2">
+                    Coins
+                  </div>
+                </div>
+              </div>
+              <div className="card-body p-0">
+                { isMounted ? loaded() : unloaded }
+              </div>
             </div>
           </div>
         </div>

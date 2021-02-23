@@ -92,3 +92,13 @@ export const fetchWatchlist = (id, user) => {
     }
   })
 }
+
+export const deleteWatchlist = (id, user) => {
+  return axios({
+    url: apiUrl + '/watchlist/' + id,
+    method: 'DELETE',
+    headers: {
+      'Authorization': 'Bearer ' + user.token
+    }
+  })
+}

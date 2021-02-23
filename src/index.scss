@@ -3,6 +3,7 @@ $body-bg: #303030;
 $body-color: #ffffff;
 $border-color: #545454;
 $input-placeholder-color: #adb5bd;
+$red: #ff4d4d;
 
 // Imports
 @import '~bootstrap/scss/bootstrap';
@@ -12,13 +13,26 @@ $input-placeholder-color: #adb5bd;
   Main Components
 */
 
+* {
+  box-sizing: border-box;
+
+  &::after, &::before {
+    box-sizing: border-box;
+  }
+}
+
 body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-.box {
-  @extend .rounded, .shadow-sm;
+.card {
+  @extend .shadow-sm;
   background: #424242;
+
+  .card-header {
+    background-color: #545454;
+    border-bottom: 1px solid #545454 !important;
+  }
 }
 
 .section-title {
@@ -50,4 +64,12 @@ body {
 
 .lh-100 {
   line-height: 1;
+}
+
+.w-90 {
+  width: 90%;
+}
+
+.w-10 {
+  width: 10%;
 }
