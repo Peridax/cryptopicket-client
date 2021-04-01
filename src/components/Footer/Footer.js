@@ -3,7 +3,7 @@ import React from 'react'
 import './Footer.scss'
 
 const Footer = () => (
-  <div className="footer pt-5 pb-3">
+  <div className="footer mt-auto pt-5 pb-3">
     <div className="container">
       <div className="row justify-content-between align-items-center">
         <div className="col">

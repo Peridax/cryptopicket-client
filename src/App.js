@@ -85,41 +85,43 @@ class App extends Component {
             />
           ))}
         </div>
-        <main className="container pt-5">
-          {/* Home Page */}
-          <Route path="/" exact render={() => (
-            <Fragment>
-              <Home user={user} />
-            </Fragment>
-          )} />
+        <main className="flex-shrink-0">
+          <div className="container pt-5">
+            {/* Home Page */}
+            <Route path="/" exact render={() => (
+              <Fragment>
+                <Home user={user} />
+              </Fragment>
+            )} />
 
-          {/* User auth pages */}
-          <Route exact path='/sign-up' render={() => (
-            <SignUp msgAlert={this.msgAlert} setUser={this.setUser} user={user} />
-          )} />
-          <Route exact path='/sign-in' render={() => (
-            <SignIn msgAlert={this.msgAlert} setUser={this.setUser} user={user} />
-          )} />
-          <AuthenticatedRoute user={user} path='/sign-out' render={() => (
-            <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
-          )} />
-          <AuthenticatedRoute user={user} path='/change-password' render={() => (
-            <ChangePassword msgAlert={this.msgAlert} user={user} />
-          )} />
+            {/* User auth pages */}
+            <Route exact path='/sign-up' render={() => (
+              <SignUp msgAlert={this.msgAlert} setUser={this.setUser} user={user} />
+            )} />
+            <Route exact path='/sign-in' render={() => (
+              <SignIn msgAlert={this.msgAlert} setUser={this.setUser} user={user} />
+            )} />
+            <AuthenticatedRoute user={user} path='/sign-out' render={() => (
+              <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
+            )} />
+            <AuthenticatedRoute user={user} path='/change-password' render={() => (
+              <ChangePassword msgAlert={this.msgAlert} user={user} />
+            )} />
 
-          {/* Watchlist routes */}
-          <AuthenticatedRoute exact user={user} path='/watchlists' render={() => (
-            <Watchlists msgAlert={this.msgAlert} user={user} />
-          )} />
-          <AuthenticatedRoute exact user={user} path='/watchlists/create' render={() => (
-            <CreateWatchlist msgAlert={this.msgAlert} user={user} />
-          )} />
-          <AuthenticatedRoute exact user={user} path='/watchlist/:id' render={() => (
-            <Watchlist user={user} msgAlert={this.msgAlert} />
-          )} />
-          <AuthenticatedRoute exact user={user} path='/watchlist/:id/update' render={() => (
-            <UpdateWatchlist user={user} msgAlert={this.msgAlert} />
-          )} />
+            {/* Watchlist routes */}
+            <AuthenticatedRoute exact user={user} path='/watchlists' render={() => (
+              <Watchlists msgAlert={this.msgAlert} user={user} />
+            )} />
+            <AuthenticatedRoute exact user={user} path='/watchlists/create' render={() => (
+              <CreateWatchlist msgAlert={this.msgAlert} user={user} />
+            )} />
+            <AuthenticatedRoute exact user={user} path='/watchlist/:id' render={() => (
+              <Watchlist user={user} msgAlert={this.msgAlert} />
+            )} />
+            <AuthenticatedRoute exact user={user} path='/watchlist/:id/update' render={() => (
+              <UpdateWatchlist user={user} msgAlert={this.msgAlert} />
+            )} />
+          </div>
         </main>
 
         <Footer user={user} />
