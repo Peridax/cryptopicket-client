@@ -1,6 +1,6 @@
 {
   "name": "cryptopicket-client",
-  "homepage": "https://peridax.github.io/cryptopicket-client",
+  "homepage": "https://cryptopicket.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

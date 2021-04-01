@@ -56,6 +56,16 @@ export const changePassword = (passwords, user) => {
   })
 }
 
+export const verifyToken = user => {
+  return axios({
+    url: apiUrl + '/verify-token',
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${user.token}`
+    }
+  })
+}
+
 /* Watchlist */
 
 export const createWatchlist = (watchlist, user) => {

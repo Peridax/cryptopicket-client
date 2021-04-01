@@ -17,18 +17,27 @@ import CreateWatchlist from './components/Watchlist/CreateWatchlist'
 import Watchlist from './components/Watchlist/Watchlist'
 import UpdateWatchlist from './components/Watchlist/UpdateWatchlist'
 
+import { verifyToken } from './api/auth'
+
 class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
       user: null,
+      verifiedToken: false,
       msgAlerts: []
     }
   }
 
-  setUser = user => this.setState({ user })
+  setUser = user => {
+    this.setState({ user })
+    localStorage.setItem('User', JSON.stringify(user))
+  }
 
-  clearUser = () => this.setState({ user: null })
+  clearUser = () => {
+    this.setState({ user: null })
+    localStorage.clear()
+  }
 
   deleteAlert = (id) => {
     this.setState((state) => {
@@ -41,6 +50,16 @@ class App extends Component {
     this.setState((state) => {
       return { msgAlerts: [...state.msgAlerts, { heading, message, variant, id }] }
     })
+  }
+
+  componentDidMount () {
+    const userItem = localStorage.getItem('User')
+
+    if (userItem) {
+      verifyToken(JSON.parse(userItem))
+        .then(res => this.setUser(res.data.user))
+        .catch(localStorage.clear())
+    }
   }
 
   render () {
