@@ -8,32 +8,32 @@ import './Header.scss'
 
 const authenticatedOptions = (user) => (
   <Fragment>
-    <Nav.Link href="#watchlists">Watchlists</Nav.Link>
+    <Nav.Link eventKey="4" href="#watchlists">Watchlists</Nav.Link>
     <NavDropdown
       title={user.email}
       id="collasible-nav-dropdown"
     >
-      <NavDropdown.Item href="#change-password">Change Password</NavDropdown.Item>
-      <NavDropdown.Item href="#sign-out">Sign Out</NavDropdown.Item>
+      <NavDropdown.Item eventKey="5" href="#change-password">Change Password</NavDropdown.Item>
+      <NavDropdown.Item eventKey="6" href="#sign-out">Sign Out</NavDropdown.Item>
     </NavDropdown>
   </Fragment>
 )
 
 const unauthenticatedOptions = (
   <Fragment>
-    <Nav.Link href="#sign-up">Sign Up</Nav.Link>
-    <Nav.Link href="#sign-in">Sign In</Nav.Link>
+    <Nav.Link eventKey="2" href="#sign-up">Sign Up</Nav.Link>
+    <Nav.Link eventKey="3" href="#sign-in">Sign In</Nav.Link>
   </Fragment>
 )
 
 const alwaysOptions = (
   <Fragment>
-    <Nav.Link href="#/">Home</Nav.Link>
+    <Nav.Link href="#/" eventKey="1">Home</Nav.Link>
   </Fragment>
 )
 
 const Header = ({ user }) => (
-  <Navbar bg="transparent" variant="dark" expand="md">
+  <Navbar collapseOnSelect bg="transparent" variant="dark" expand="md">
     <div className="container">
       <Navbar.Brand href="#">
         CryptoPicket

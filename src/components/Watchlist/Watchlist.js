@@ -132,7 +132,7 @@ class Watchlist extends Component {
     return (
       <div className="row">
         <div className="col-12">
-          <Link to="/watchlists" className="text-white d-flex mb-2 mt-3" style={{ textDecoration: 'none', justifyContent: 'flex-end' }}>
+          <Link to="/watchlists" className="text-white d-flex mb-2 mt-3" style={{ textDecoration: 'none', justifyContent: 'flex-end', lineHeight: '38px' }}>
             Return to watchlists
           </Link>
           <div className="card">
